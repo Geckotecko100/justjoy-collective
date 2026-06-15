@@ -19,40 +19,25 @@ const css = `
   @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --cream:    #F8F4F1;
-    --warm:     #EEE0DC;
-    --sand:     #D4C0BC;
-    --rose:     #B56B72;
-    --rose-dk:  #8C4A50;
-    --olive:    #5C6B3A;
-    --fern:     #8C9E62;
-    --oak:      #2A2620;
-    --mid:      #7A6460;
-    --light:    #A89490;
-    --white:    #FFFFFF;
+    --cream:#F8F4F1; --warm:#EEE0DC; --sand:#D4C0BC;
+    --rose:#B56B72; --rose-dk:#8C4A50;
+    --olive:#5C6B3A; --fern:#8C9E62;
+    --oak:#2A2620; --mid:#7A6460; --white:#FFFFFF;
   }
-
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior:smooth; }
   body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--oak); line-height:1.7; overflow-x:hidden; }
   h1,h2,h3,h4 { font-family:'Cormorant Garamond',serif; font-weight:400; line-height:1.2; }
 
   /* NAV */
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:0 2.5rem; height:70px;
-    background:rgba(248,244,241,0.96); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--sand); transition:box-shadow 0.3s;
-  }
-  nav.scrolled { box-shadow:0 2px 24px rgba(42,38,32,0.1); }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 2.5rem; height:70px; background:rgba(248,244,241,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--sand); transition:box-shadow .3s; }
+  nav.scrolled { box-shadow:0 2px 24px rgba(42,38,32,.1); }
   .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:500; letter-spacing:.08em; color:var(--oak); text-transform:uppercase; cursor:pointer; }
   .nav-logo span { color:var(--rose); }
   .nav-links { display:flex; gap:2.5rem; list-style:none; align-items:center; }
   .nav-links a { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--mid); cursor:pointer; transition:color .2s; border:none; background:none; padding:0; font-family:'DM Sans',sans-serif; }
   .nav-links a:hover,.nav-links a.active { color:var(--rose); }
-  .nav-cta { background:var(--rose) !important; color:#fff !important; padding:.45rem 1.2rem !important; border-radius:2px; transition:background .2s !important; }
+  .nav-cta { background:var(--rose) !important; color:#fff !important; padding:.45rem 1.2rem !important; border-radius:2px; }
   .nav-cta:hover { background:var(--rose-dk) !important; }
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
   .hamburger span { display:block; width:24px; height:1.5px; background:var(--oak); transition:all .3s; }
@@ -90,17 +75,20 @@ const css = `
   .btn-outline-white { display:inline-flex; align-items:center; gap:.5rem; background:transparent; color:#fff; padding:.8rem 1.8rem; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; border:1px solid rgba(255,255,255,.4); border-radius:2px; transition:all .2s; font-family:'DM Sans',sans-serif; }
   .btn-outline-white:hover { border-color:#fff; background:rgba(255,255,255,.1); }
 
-  /* SECTION */
-  .section { padding:6rem 5rem; }
+  /* SECTIONS */
   .section-label { font-size:.7rem; letter-spacing:.22em; text-transform:uppercase; color:var(--rose); display:flex; align-items:center; gap:.5rem; margin-bottom:.9rem; }
   .section-title { font-size:clamp(2rem,3.5vw,3rem); color:var(--oak); margin-bottom:1rem; }
   .section-body { font-size:1rem; color:var(--mid); max-width:700px; line-height:1.85; }
   .divider { width:48px; height:2px; background:var(--rose); margin:1.4rem 0; }
-  .divider.center { margin:1.4rem auto; }
 
-  /* MISSION */
+  /* HOME: MISSION — zoomed out to show full scene */
   .mission-grid { display:grid; grid-template-columns:1fr 1fr; min-height:520px; }
-  .mission-img { width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; min-height:420px; }
+  .mission-img {
+    width:100%; height:100%; display:block; min-height:420px;
+    object-fit:contain;
+    object-position:center center;
+    background:#EEE0DC;
+  }
   .mission-content { padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; background:var(--cream); }
 
   /* VALUES */
@@ -114,13 +102,13 @@ const css = `
   .value-card h3 { font-size:1.9rem; color:#fff; margin-bottom:.8rem; position:relative; }
   .value-card p { font-size:.92rem; color:rgba(255,255,255,.82); line-height:1.85; position:relative; }
 
-  /* IMAGE STRIP */
-  .img-strip { width:100%; height:340px; object-fit:cover; object-position:center 40%; display:block; }
+  /* VIDEO / IMG STRIP */
+  .img-strip { width:100%; height:420px; object-fit:cover; object-position:center 40%; display:block; }
 
   /* TESTIMONIALS */
   .testimonials-bg { background:var(--warm); padding:6rem 5rem; }
   .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
-  .testimonial-card { background:#fff; padding:2.5rem; border-left:3px solid var(--rose); position:relative; }
+  .testimonial-card { background:#fff; padding:2.5rem; border-left:3px solid var(--rose); }
   .testimonial-card::before { content:'"'; font-family:'Cormorant Garamond',serif; font-size:5rem; line-height:.6; color:var(--sand); display:block; margin-bottom:1rem; }
   .testimonial-card p { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:var(--oak); line-height:1.75; }
 
@@ -140,7 +128,14 @@ const css = `
   .offerings-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--sand); }
   .offering-card { background:var(--cream); transition:background .2s; }
   .offering-card:hover { background:#fff; }
-  .offering-img { width:100%; height:240px; object-fit:cover; object-position:center 30%; display:block; }
+
+  /* OFFERING IMAGES — default framing */
+  .offering-img { width:100%; height:240px; object-fit:cover; object-position:center 50%; display:block; }
+  /* Card 1 — Art of Skilled Facilitation — heads cut, pull up */
+  .offering-img-1 { object-position:center 15%; }
+  /* Card 2 — Art of Skilled Dialogue — heads cut, pull up */
+  .offering-img-2 { object-position:center 10%; }
+
   .offering-body { padding:2.8rem; }
   .offering-number { font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--rose); margin-bottom:.8rem; display:flex; align-items:center; gap:.5rem; }
   .offering-card h2 { font-size:1.7rem; color:var(--oak); margin-bottom:.8rem; }
@@ -162,15 +157,36 @@ const css = `
   .about-mission p { color:rgba(255,255,255,.82); line-height:1.9; font-size:.97rem; }
   .about-mission p+p { margin-top:1rem; }
 
+  /* TEAM — smaller portraits in stylish cards */
   .team-section { padding:6rem 5rem; }
-  .team-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:5rem; margin-top:4rem; }
-  .team-photo-wrap { width:100%; aspect-ratio:3/4; overflow:hidden; border-radius:2px; margin-bottom:1.8rem; background:var(--warm); }
-  .team-photo { width:100%; height:100%; object-fit:cover; object-position:center 8%; display:block; transition:transform .4s; }
-  .team-photo-wrap:hover .team-photo { transform:scale(1.03); }
-  .team-member h2 { font-size:2.1rem; color:var(--oak); margin-bottom:.25rem; }
-  .team-member .role { font-size:.75rem; letter-spacing:.15em; text-transform:uppercase; color:var(--rose); display:flex; align-items:center; gap:.4rem; margin-bottom:1.2rem; }
-  .team-member p { font-size:.93rem; color:var(--mid); line-height:1.85; margin-bottom:.8rem; }
-  .linkedin-link { display:inline-flex; align-items:center; gap:.5rem; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--olive); text-decoration:none; margin-top:.8rem; border-bottom:1px solid var(--fern); padding-bottom:2px; transition:color .2s; }
+  .team-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:4rem; margin-top:4rem; }
+  .team-card {
+    background:#fff;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 4px 32px rgba(42,38,32,.08);
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:0;
+    border-left:4px solid var(--rose);
+  }
+  .team-photo-col {
+    background:var(--warm);
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:2rem 1rem;
+  }
+  .team-photo {
+    width:120px; height:120px;
+    object-fit:cover; object-position:center 5%;
+    border-radius:50%;
+    border:3px solid var(--rose);
+    display:block;
+  }
+  .team-content { padding:2rem 2rem 2rem 1.5rem; }
+  .team-member h2 { font-size:1.6rem; color:var(--oak); margin-bottom:.2rem; }
+  .team-member .role { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--rose); display:flex; align-items:center; gap:.4rem; margin-bottom:1rem; }
+  .team-member p { font-size:.88rem; color:var(--mid); line-height:1.8; margin-bottom:.6rem; }
+  .linkedin-link { display:inline-flex; align-items:center; gap:.4rem; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--olive); text-decoration:none; margin-top:.6rem; border-bottom:1px solid var(--fern); padding-bottom:2px; transition:color .2s; }
   .linkedin-link:hover { color:var(--rose); border-color:var(--rose); }
 
   /* EVENTS */
@@ -221,14 +237,13 @@ const css = `
   .footer-ack { font-size:.78rem; color:rgba(255,255,255,.38); line-height:1.75; max-width:580px; }
   .footer-copy { font-size:.75rem; color:rgba(255,255,255,.28); white-space:nowrap; align-self:flex-end; }
 
-  /* RESPONSIVE */
   @media (max-width:960px) {
     .nav-links { display:none; }
     .hamburger { display:flex; }
     .hero,.mission-grid,.contact-layout { grid-template-columns:1fr; }
     .hero-right { min-height:320px; }
     .hero-left { padding:3rem 2rem; }
-    .mission-content,.section,.testimonials-bg,.team-section { padding:4rem 2rem; }
+    .mission-content,.testimonials-bg,.team-section { padding:4rem 2rem; }
     .values-grid { grid-template-columns:1fr; }
     .testimonials-grid { grid-template-columns:1fr; }
     .cta-band { padding:3.5rem 2rem; flex-direction:column; }
@@ -237,14 +252,15 @@ const css = `
     .offering-body { padding:2rem; }
     .about-hero-content { padding:3rem 2rem; }
     .about-mission { grid-template-columns:1fr; padding:3.5rem 2rem; gap:2rem; }
-    .team-grid { grid-template-columns:1fr; gap:3.5rem; }
+    .team-grid { grid-template-columns:1fr; gap:2rem; }
+    .team-card { grid-template-columns:1fr; }
+    .team-photo-col { padding:2rem; flex-direction:row; justify-content:flex-start; }
     .events-hero,.events-empty { padding:4rem 2rem; }
     .contact-left,.contact-right { padding:4rem 2rem; }
     footer { padding:3.5rem 2rem 2rem; }
     .footer-top { grid-template-columns:1fr; gap:2.5rem; }
     .footer-bottom { flex-direction:column; }
   }
-
   .fade-in { opacity:0; transform:translateY(20px); animation:fadeUp .7s ease forwards; }
   @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
   .fade-in:nth-child(2) { animation-delay:.15s; }
@@ -253,12 +269,12 @@ const css = `
 `;
 
 const OFFERINGS = [
-  { id:1, img:"facilitation1", icon:"ti-users", title:"The Art of Skilled Facilitation", short:"AOSF", tags:["Face to face","Online","7–10 days","Max 24"], body:"This unique workshop takes a deep dive into transformational process facilitation. Using an experiential approach, participants learn theory and skills to lead transformational adult learning environments — engaging the head, heart and will of groups with a leader as host. Participants co-design, practise and receive feedback on a facilitation project using participatory, adult learning principles." },
-  { id:2, img:"facilitation2", icon:"ti-messages", title:"The Art of Skilled Dialogue", short:"AOSD", tags:["Face to face","7–10 days","Max 30"], body:"Creating and hosting brave spaces where people shift conversations from debate into generative dialogue is a skill requiring practice. Participants dive deep into processes for dialogue, personal reflection and co-creation — moving from 'talking nice' to genuine inquiry, contemplation, generative dialogue and collective creativity." },
-  { id:3, img:"facilitation3", icon:"ti-ear", title:"Facilitation", short:"FACILITATION", tags:["Face to face","Online","Customised"], body:"Just Joy Collective offers skilled process facilitators who assess a group's needs and cultivate the space required for people to achieve their goals. Our facilitators are deep listeners, skilled in holding chaotic and ambiguous spaces where outcomes are unknown yet unfolding. We have wide experience facilitating board meetings, conferences, assemblies and leadership workshops across the globe." },
-  { id:4, img:"consulting", icon:"ti-bulb", title:"Consulting", short:"CONSULTING", tags:["Tailored","Flexible"], body:"We offer consulting which grows the capacity of facilitators, leaders and change makers to customise their own facilitation sessions in a way that engages participants' head, heart and will. Contact us with ideas and we can work together to create transformative experiences for your participants." },
-  { id:5, img:"digital", icon:"ti-device-laptop", title:"Digital Skills for Mission", short:"DSFM", tags:["Online","Face to face","Customised"], body:"Developing customised learning programs and providing safe learning environments, our programs build confidence and enable participants to develop skills for today's technology-focused world. Workshops include Digital Communications for Mission Effectiveness, Hosting Digital Communications, Good Cyber Practice and Managing Digital Communications." },
-  { id:6, img:"webExp", icon:"ti-world", title:"Process Based Web Experiences", short:"PBWE", tags:["Online","Global reach","Multilingual"], body:"Taking our knowledge of process facilitation and applying it to the digital realm, we develop virtual experiences that reach across borders, languages and timezones — enabling organisations to conduct virtual conferences and traditionally face-to-face processes in new and engaging ways, with reduced costs and greater participation." },
+  { id:1, img:"facilitation1", imgClass:"offering-img offering-img-1", icon:"ti-users", title:"The Art of Skilled Facilitation", short:"AOSF", tags:["Face to face","Online","7–10 days","Max 24"], body:"This unique workshop takes a deep dive into transformational process facilitation. Using an experiential approach, participants learn theory and skills to lead transformational adult learning environments — engaging the head, heart and will of groups with a leader as host. Participants co-design, practise and receive feedback on a facilitation project using participatory, adult learning principles." },
+  { id:2, img:"facilitation2", imgClass:"offering-img offering-img-2", icon:"ti-messages", title:"The Art of Skilled Dialogue", short:"AOSD", tags:["Face to face","7–10 days","Max 30"], body:"Creating and hosting brave spaces where people shift conversations from debate into generative dialogue is a skill requiring practice. Participants dive deep into processes for dialogue, personal reflection and co-creation — moving from 'talking nice' to genuine inquiry, contemplation, generative dialogue and collective creativity." },
+  { id:3, img:"facilitation3", imgClass:"offering-img", icon:"ti-ear", title:"Facilitation", short:"FACILITATION", tags:["Face to face","Online","Customised"], body:"Just Joy Collective offers skilled process facilitators who assess a group's needs and cultivate the space required for people to achieve their goals. Our facilitators are deep listeners, skilled in holding chaotic and ambiguous spaces where outcomes are unknown yet unfolding. We have wide experience facilitating board meetings, conferences, assemblies and leadership workshops across the globe." },
+  { id:4, img:"consulting", imgClass:"offering-img", icon:"ti-bulb", title:"Consulting", short:"CONSULTING", tags:["Tailored","Flexible"], body:"We offer consulting which grows the capacity of facilitators, leaders and change makers to customise their own facilitation sessions in a way that engages participants' head, heart and will. Contact us with ideas and we can work together to create transformative experiences for your participants." },
+  { id:5, img:"digital", imgClass:"offering-img", icon:"ti-device-laptop", title:"Digital Skills for Mission", short:"DSFM", tags:["Online","Face to face","Customised"], body:"Developing customised learning programs and providing safe learning environments, our programs build confidence and enable participants to develop skills for today's technology-focused world. Workshops include Digital Communications for Mission Effectiveness, Hosting Digital Communications, Good Cyber Practice and Managing Digital Communications." },
+  { id:6, img:"webExp", imgClass:"offering-img", icon:"ti-world", title:"Process Based Web Experiences", short:"PBWE", tags:["Online","Global reach","Multilingual"], body:"Taking our knowledge of process facilitation and applying it to the digital realm, we develop virtual experiences that reach across borders, languages and timezones — enabling organisations to conduct virtual conferences and face-to-face processes in new and engaging ways, with reduced costs and greater participation." },
 ];
 
 const TESTIMONIALS = [
@@ -268,29 +284,23 @@ const TESTIMONIALS = [
 ];
 
 function Nav({ page, setPage }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-  const nav = p => { setPage(p); setMenuOpen(false); window.scrollTo(0,0); };
-  const links = [{id:"home",label:"Home"},{id:"offerings",label:"Offerings"},{id:"about",label:"About Us"},{id:"events",label:"Events"},{id:"contact",label:"Contact"}];
+  const [scrolled,setScrolled]=useState(false);
+  const [menuOpen,setMenuOpen]=useState(false);
+  useEffect(()=>{ const fn=()=>setScrolled(window.scrollY>20); window.addEventListener("scroll",fn); return()=>window.removeEventListener("scroll",fn); },[]);
+  const nav=p=>{ setPage(p); setMenuOpen(false); window.scrollTo(0,0); };
+  const links=[{id:"home",label:"Home"},{id:"offerings",label:"Offerings"},{id:"about",label:"About Us"},{id:"events",label:"Events"},{id:"contact",label:"Contact"}];
   return (
     <>
-      <nav className={scrolled ? "scrolled" : ""}>
-        <span className="nav-logo" onClick={() => nav("home")}>Just <span>Joy</span> Collective</span>
+      <nav className={scrolled?"scrolled":""}>
+        <span className="nav-logo" onClick={()=>nav("home")}>Just <span>Joy</span> Collective</span>
         <ul className="nav-links">
-          {links.map(l => <li key={l.id}><a className={page===l.id?"active":""} onClick={()=>nav(l.id)}>{l.label}</a></li>)}
+          {links.map(l=><li key={l.id}><a className={page===l.id?"active":""} onClick={()=>nav(l.id)}>{l.label}</a></li>)}
           <li><a className="nav-cta" onClick={()=>nav("contact")}>Enquire</a></li>
         </ul>
-        <button className={`hamburger ${menuOpen?"open":""}`} onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-          <span/><span/><span/>
-        </button>
+        <button className={`hamburger ${menuOpen?"open":""}`} onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu"><span/><span/><span/></button>
       </nav>
       <div className={`mobile-menu ${menuOpen?"open":""}`}>
-        {links.map(l => <a key={l.id} onClick={()=>nav(l.id)}>{l.label}</a>)}
+        {links.map(l=><a key={l.id} onClick={()=>nav(l.id)}>{l.label}</a>)}
         <a onClick={()=>nav("contact")} style={{color:"var(--rose)"}}>Enquire Now →</a>
       </div>
     </>
@@ -298,30 +308,17 @@ function Nav({ page, setPage }) {
 }
 
 function Footer({ setPage }) {
-  const nav = p => { setPage(p); window.scrollTo(0,0); };
+  const nav=p=>{ setPage(p); window.scrollTo(0,0); };
   return (
     <footer>
       <div className="footer-top">
-        <div className="footer-brand">
-          <h3>Just <span>Joy</span> Collective</h3>
-          <p>Facilitation and capacity development for organisations creating a more socially just and joy-filled world.</p>
-        </div>
-        <div className="footer-col">
-          <h4>Navigate</h4>
-          <ul>
-            {[{p:"home",icon:"ti-home",label:"Home"},{p:"offerings",icon:"ti-package",label:"Offerings"},{p:"about",icon:"ti-users",label:"About Us"},{p:"events",icon:"ti-calendar",label:"Events"},{p:"contact",icon:"ti-mail",label:"Contact"}].map(x=>(
-              <li key={x.p}><button onClick={()=>nav(x.p)}><i className={`ti ${x.icon}`} aria-hidden="true"/>{x.label}</button></li>
-            ))}
-          </ul>
-        </div>
-        <div className="footer-col">
-          <h4>Connect</h4>
-          <ul>
-            <li><a href="mailto:justjoycollective@gmail.com"><i className="ti ti-mail" aria-hidden="true"/>justjoycollective@gmail.com</a></li>
-            <li><a href="https://www.linkedin.com/in/just-joy-collective-7132a8237/" target="_blank" rel="noreferrer"><i className="ti ti-brand-linkedin" aria-hidden="true"/>LinkedIn</a></li>
-            <li><span style={{display:"flex",alignItems:"center",gap:".5rem",color:"rgba(255,255,255,.6)",fontSize:".88rem"}}><i className="ti ti-map-pin" aria-hidden="true"/>Australia — worldwide</span></li>
-          </ul>
-        </div>
+        <div className="footer-brand"><h3>Just <span>Joy</span> Collective</h3><p>Facilitation and capacity development for organisations creating a more socially just and joy-filled world.</p></div>
+        <div className="footer-col"><h4>Navigate</h4><ul>{[{p:"home",icon:"ti-home",label:"Home"},{p:"offerings",icon:"ti-package",label:"Offerings"},{p:"about",icon:"ti-users",label:"About Us"},{p:"events",icon:"ti-calendar",label:"Events"},{p:"contact",icon:"ti-mail",label:"Contact"}].map(x=><li key={x.p}><button onClick={()=>nav(x.p)}><i className={`ti ${x.icon}`}/>{x.label}</button></li>)}</ul></div>
+        <div className="footer-col"><h4>Connect</h4><ul>
+          <li><a href="mailto:justjoycollective@gmail.com"><i className="ti ti-mail"/>justjoycollective@gmail.com</a></li>
+          <li><a href="https://www.linkedin.com/in/just-joy-collective-7132a8237/" target="_blank" rel="noreferrer"><i className="ti ti-brand-linkedin"/>LinkedIn</a></li>
+          <li><span style={{display:"flex",alignItems:"center",gap:".5rem",color:"rgba(255,255,255,.6)",fontSize:".88rem"}}><i className="ti ti-map-pin"/>Australia — worldwide</span></li>
+        </ul></div>
       </div>
       <div className="footer-bottom">
         <p className="footer-ack">Just Joy Collective acknowledges Traditional Owners of Country throughout Australia and recognises the continuing connection to lands, waters and communities. We pay our respect to Aboriginal and Torres Strait Islander cultures and to Elders past and present.</p>
@@ -332,17 +329,17 @@ function Footer({ setPage }) {
 }
 
 function Home({ setPage }) {
-  const nav = p => { setPage(p); window.scrollTo(0,0); };
+  const nav=p=>{ setPage(p); window.scrollTo(0,0); };
   return (
     <div className="page">
       <section className="hero">
         <div className="hero-left">
-          <p className="hero-eyebrow fade-in"><i className="ti ti-leaf" aria-hidden="true"/>Facilitation & Capacity Development</p>
+          <p className="hero-eyebrow fade-in"><i className="ti ti-leaf"/>Facilitation & Capacity Development</p>
           <h1 className="hero-title fade-in">Creating a more <em>just</em> and joy‑filled world</h1>
           <p className="hero-body fade-in">Just Joy Collective works with people in social justice, human rights and mission-based agencies — developing self and social awareness, process design skills, and technology for social change.</p>
           <div className="hero-actions fade-in">
-            <button className="btn-primary" onClick={()=>nav("offerings")}><i className="ti ti-arrow-right" aria-hidden="true"/>Explore Offerings</button>
-            <button className="btn-outline" onClick={()=>nav("contact")}><i className="ti ti-message" aria-hidden="true"/>Start a Conversation</button>
+            <button className="btn-primary" onClick={()=>nav("offerings")}><i className="ti ti-arrow-right"/>Explore Offerings</button>
+            <button className="btn-outline" onClick={()=>nav("contact")}><i className="ti ti-message"/>Start a Conversation</button>
           </div>
         </div>
         <div className="hero-right">
@@ -357,9 +354,9 @@ function Home({ setPage }) {
       </section>
 
       <div className="mission-grid">
-        <img className="mission-img" src={IMAGES.workshopGroup} alt="Workshop participants in dialogue"/>
+        <img className="mission-img" src={IMAGES.workshopGroup} alt="Paula and Jamie — Just Joy Collective"/>
         <div className="mission-content">
-          <span className="section-label"><i className="ti ti-heart" aria-hidden="true"/>Our Purpose</span>
+          <span className="section-label"><i className="ti ti-heart"/>Our Purpose</span>
           <h2 className="section-title">Deep conversation is where every engagement begins</h2>
           <div className="divider"/>
           <p className="section-body">We believe that strategic and sustained partnerships, a systems view and an integrated approach support better cultural shifts. Active participation and application of new learnings to personal and local contexts brings about personal and collective transformation.<br/><br/>Just Joy Collective works with faith-based communities, NGOs and NFPs, and has a personal commitment to supporting organisations working with women, girls and children in situations of marginalisation.</p>
@@ -367,24 +364,19 @@ function Home({ setPage }) {
       </div>
 
       <div className="values-grid">
-        {[
-          {letter:"C",title:"Curiosity",icon:"ti-question-mark",body:"We bring genuine curiosity to every engagement — exploring together, asking deeper questions, and remaining open to what emerges from the group."},
-          {letter:"C",title:"Compassion",icon:"ti-heart-handshake",body:"We hold space with warmth and care, recognising the courage it takes to enter genuine dialogue and the dignity of every person in the room."},
-          {letter:"C",title:"Courage",icon:"ti-flame",body:"Transformational work asks us to step into the unknown together. We walk alongside groups with courage, holding both the challenge and the possibility."},
-        ].map(v=>(
+        {[{letter:"C",title:"Curiosity",icon:"ti-question-mark",body:"We bring genuine curiosity to every engagement — exploring together, asking deeper questions, and remaining open to what emerges from the group."},{letter:"C",title:"Compassion",icon:"ti-heart-handshake",body:"We hold space with warmth and care, recognising the courage it takes to enter genuine dialogue and the dignity of every person in the room."},{letter:"C",title:"Courage",icon:"ti-flame",body:"Transformational work asks us to step into the unknown together. We walk alongside groups with courage, holding both the challenge and the possibility."}].map(v=>(
           <div className="value-card" key={v.title} data-letter={v.letter}>
-            <i className={`ti ${v.icon} value-icon`} aria-hidden="true"/>
-            <h3>{v.title}</h3>
-            <p>{v.body}</p>
+            <i className={`ti ${v.icon} value-icon`}/>
+            <h3>{v.title}</h3><p>{v.body}</p>
           </div>
         ))}
       </div>
 
-      <img className="img-strip" src={IMAGES.workshopRoom} alt="Just Joy Collective facilitation room"/>
+      <video className="img-strip" src="/video-stones.mp4" autoPlay muted loop playsInline style={{objectFit:"cover",objectPosition:"center",display:"block"}}/>
 
       <div className="testimonials-bg">
         <div style={{maxWidth:1200,margin:"0 auto"}}>
-          <span className="section-label"><i className="ti ti-quote" aria-hidden="true"/>What Participants Say</span>
+          <span className="section-label"><i className="ti ti-quote"/>What Participants Say</span>
           <h2 className="section-title">Words from the room</h2>
           <div className="testimonials-grid">
             {TESTIMONIALS.map((t,i)=><div className="testimonial-card" key={i}><p>{t.quote}</p></div>)}
@@ -395,8 +387,8 @@ function Home({ setPage }) {
       <div className="cta-band">
         <h2>Ready to start a <em>conversation</em>?</h2>
         <div style={{display:"flex",gap:"1rem",flexWrap:"wrap"}}>
-          <button className="btn-primary" onClick={()=>nav("offerings")}><i className="ti ti-package" aria-hidden="true"/>View Offerings</button>
-          <button className="btn-outline-white" onClick={()=>nav("contact")}><i className="ti ti-mail" aria-hidden="true"/>Contact Us</button>
+          <button className="btn-primary" onClick={()=>nav("offerings")}><i className="ti ti-package"/>View Offerings</button>
+          <button className="btn-outline-white" onClick={()=>nav("contact")}><i className="ti ti-mail"/>Contact Us</button>
         </div>
       </div>
       <Footer setPage={setPage}/>
@@ -405,14 +397,14 @@ function Home({ setPage }) {
 }
 
 function Offerings({ setPage }) {
-  const nav = p => { setPage(p); window.scrollTo(0,0); };
+  const nav=p=>{ setPage(p); window.scrollTo(0,0); };
   return (
     <div className="page">
       <div className="offerings-hero">
         <img className="offerings-hero-img" src={IMAGES.workshopRoom} alt="Workshop"/>
         <div className="offerings-hero-overlay"/>
         <div className="offerings-hero-content">
-          <span className="section-label" style={{color:"rgba(255,255,255,.6)"}}><i className="ti ti-package" aria-hidden="true"/>What We Offer</span>
+          <span className="section-label" style={{color:"rgba(255,255,255,.6)"}}><i className="ti ti-package"/>What We Offer</span>
           <h1>Capacity Development<br/>Workshops & Services</h1>
           <p>Both online and face-to-face facilitation services, process design consulting, and sustained capacity development programs. All programs are uniquely designed to achieve your goals.</p>
         </div>
@@ -420,20 +412,20 @@ function Offerings({ setPage }) {
       <div className="offerings-grid">
         {OFFERINGS.map((o,i)=>(
           <div className="offering-card" key={o.id}>
-            <img className="offering-img" src={IMAGES[o.img]} alt={o.title}/>
+            <img className={o.imgClass} src={IMAGES[o.img]} alt={o.title}/>
             <div className="offering-body">
-              <span className="offering-number"><i className={`ti ${o.icon}`} aria-hidden="true"/>{String(i+1).padStart(2,"0")} — {o.short}</span>
+              <span className="offering-number"><i className={`ti ${o.icon}`}/>{String(i+1).padStart(2,"0")} — {o.short}</span>
               <h2>{o.title}</h2>
-              <div style={{marginBottom:"1rem"}}>{o.tags.map(t=><span className="offering-tag" key={t}><i className="ti ti-tag" style={{fontSize:"10px"}} aria-hidden="true"/>{t}</span>)}</div>
+              <div style={{marginBottom:"1rem"}}>{o.tags.map(t=><span className="offering-tag" key={t}><i className="ti ti-tag" style={{fontSize:"10px"}}/>{t}</span>)}</div>
               <p>{o.body}</p>
-              <button className="offering-enquire" onClick={()=>nav("contact")}><i className="ti ti-arrow-right" aria-hidden="true"/>Enquire about this offering</button>
+              <button className="offering-enquire" onClick={()=>nav("contact")}><i className="ti ti-arrow-right"/>Enquire about this offering</button>
             </div>
           </div>
         ))}
       </div>
       <div className="cta-band">
         <h2>All programs designed <em>uniquely</em> for your goals</h2>
-        <button className="btn-primary" onClick={()=>nav("contact")}><i className="ti ti-message" aria-hidden="true"/>Start a Conversation</button>
+        <button className="btn-primary" onClick={()=>nav("contact")}><i className="ti ti-message"/>Start a Conversation</button>
       </div>
       <Footer setPage={setPage}/>
     </div>
@@ -441,14 +433,14 @@ function Offerings({ setPage }) {
 }
 
 function About({ setPage }) {
-  const nav = p => { setPage(p); window.scrollTo(0,0); };
+  const nav=p=>{ setPage(p); window.scrollTo(0,0); };
   return (
     <div className="page">
       <div className="about-hero">
         <img className="about-hero-img" src={IMAGES.workshopRoom} alt="Facilitation workshop"/>
         <div className="about-hero-overlay"/>
         <div className="about-hero-content">
-          <span className="section-label"><i className="ti ti-users" aria-hidden="true"/>Who We Are</span>
+          <span className="section-label"><i className="ti ti-users"/>Who We Are</span>
           <h1>The Facilitators</h1>
           <div className="divider"/>
           <p>Just Joy Collective is built on decades of experience in education, leadership, facilitation and technology — united by a shared belief that a more just and joy-filled world is possible through genuine dialogue and collaboration.</p>
@@ -465,38 +457,40 @@ function About({ setPage }) {
       </div>
 
       <div className="team-section">
-        <span className="section-label"><i className="ti ti-id-badge" aria-hidden="true"/>Meet the Team</span>
+        <span className="section-label"><i className="ti ti-id-badge"/>Meet the Team</span>
         <h2 className="section-title">Paula & Jamie Sgherza</h2>
         <div className="divider"/>
         <div className="team-grid">
-          <div className="team-member">
-            <div className="team-photo-wrap">
-              <img className="team-photo" src={IMAGES.paula} alt="Paula Sgherza"/>
+          {[
+            { name:"Paula Sgherza", img:IMAGES.paula, role:"Co-founder · Process Facilitator", linkedin:"https://www.linkedin.com/in/paula-sgherza-6750aa3b/", linkedinLabel:"Connect with Paula", paras:[
+              "Paula loves facilitation. It is her joy to be of service to others in this creative and essential work for leaders of today and the future.",
+              "She brings over 30 years' experience as an educator and leader and is highly regarded for her relaxed, contemplative and innovative style.",
+              "Paula is trained in the Art of Hosting, Theory U, Theory of Change, Appreciative Inquiry, Open Space and the Circle Way. She applies a trauma-informed approach to all her work."
+            ]},
+            { name:"Jamie Sgherza", img:IMAGES.jamie, role:"Co-founder · Technology & Facilitation", linkedin:"https://www.linkedin.com/in/jamiesgherza/", linkedinLabel:"Connect with Jamie", paras:[
+              "Jamie loves technology. He brings a wealth of experience from diverse leadership roles across complex education and information technology settings.",
+              "As a skilled leader, educator and facilitator, Jamie creates dynamic environments that encourage personal and professional growth — known for his easy-going, action-oriented style.",
+              "Jamie has trained in Theory U, Theory of Change and project management, and has wide experience assisting organisations with digital transformation."
+            ]},
+          ].map(m=>(
+            <div className="team-card" key={m.name}>
+              <div className="team-photo-col">
+                <img className="team-photo" src={m.img} alt={m.name}/>
+              </div>
+              <div className="team-content team-member">
+                <h2>{m.name}</h2>
+                <span className="role"><i className="ti ti-star"/>{m.role}</span>
+                {m.paras.map((p,i)=><p key={i}>{p}</p>)}
+                <a href={m.linkedin} className="linkedin-link" target="_blank" rel="noreferrer"><i className="ti ti-brand-linkedin"/>{m.linkedinLabel} on LinkedIn</a>
+              </div>
             </div>
-            <h2>Paula Sgherza</h2>
-            <span className="role"><i className="ti ti-star" aria-hidden="true"/>Co-founder · Process Facilitator</span>
-            <p>Paula loves facilitation. It is her joy to be of service to others in this creative and essential work for leaders of today and the future.</p>
-            <p>She brings over 30 years' experience as an educator and leader and is highly regarded for her relaxed, contemplative and innovative style.</p>
-            <p>Paula is trained in the Art of Hosting, Theory U, Theory of Change, Appreciative Inquiry, Open Space and the Circle Way. She applies a trauma-informed approach to all her work.</p>
-            <a href="https://www.linkedin.com/in/paula-sgherza-6750aa3b/" className="linkedin-link" target="_blank" rel="noreferrer"><i className="ti ti-brand-linkedin" aria-hidden="true"/>Connect with Paula on LinkedIn</a>
-          </div>
-          <div className="team-member">
-            <div className="team-photo-wrap">
-              <img className="team-photo" src={IMAGES.jamie} alt="Jamie Sgherza"/>
-            </div>
-            <h2>Jamie Sgherza</h2>
-            <span className="role"><i className="ti ti-star" aria-hidden="true"/>Co-founder · Technology & Facilitation</span>
-            <p>Jamie loves technology. He brings a wealth of experience from diverse leadership roles across complex education and information technology settings.</p>
-            <p>As a skilled leader, educator and facilitator, Jamie creates dynamic environments that encourage personal and professional growth — known for his easy-going, action-oriented style.</p>
-            <p>Jamie has trained in Theory U, Theory of Change and project management, and has wide experience assisting organisations with digital transformation.</p>
-            <a href="https://www.linkedin.com/in/jamiesgherza/" className="linkedin-link" target="_blank" rel="noreferrer"><i className="ti ti-brand-linkedin" aria-hidden="true"/>Connect with Jamie on LinkedIn</a>
-          </div>
+          ))}
         </div>
       </div>
 
       <div className="cta-band">
         <h2>Let's work <em>together</em></h2>
-        <button className="btn-primary" onClick={()=>nav("contact")}><i className="ti ti-mail" aria-hidden="true"/>Get in Touch</button>
+        <button className="btn-primary" onClick={()=>nav("contact")}><i className="ti ti-mail"/>Get in Touch</button>
       </div>
       <Footer setPage={setPage}/>
     </div>
@@ -504,27 +498,27 @@ function About({ setPage }) {
 }
 
 function Events({ setPage }) {
-  const nav = p => { setPage(p); window.scrollTo(0,0); };
+  const nav=p=>{ setPage(p); window.scrollTo(0,0); };
   return (
     <div className="page">
       <div className="events-hero">
-        <span className="section-label" style={{color:"rgba(255,255,255,.55)"}}><i className="ti ti-calendar" aria-hidden="true"/>Upcoming Events</span>
+        <span className="section-label" style={{color:"rgba(255,255,255,.55)"}}><i className="ti ti-calendar"/>Upcoming Events</span>
         <h1>Join Us</h1>
         <p>Workshops, gatherings and learning opportunities with Just Joy Collective. Register your interest and we'll be in touch when something is scheduled near you.</p>
       </div>
       <div className="events-empty">
-        <i className="ti ti-plant events-empty-icon" aria-hidden="true"/>
+        <i className="ti ti-plant events-empty-icon"/>
         <h2>No upcoming events scheduled</h2>
         <p>We're currently planning our next round of workshops and programs. Reach out — we may be able to bring something to your organisation.</p>
         <div style={{display:"flex",gap:"1rem",justifyContent:"center",flexWrap:"wrap"}}>
-          <button className="btn-primary" onClick={()=>nav("contact")}><i className="ti ti-mail" aria-hidden="true"/>Register Your Interest</button>
-          <button className="btn-outline" onClick={()=>nav("offerings")}><i className="ti ti-package" aria-hidden="true"/>View All Offerings</button>
+          <button className="btn-primary" onClick={()=>nav("contact")}><i className="ti ti-mail"/>Register Your Interest</button>
+          <button className="btn-outline" onClick={()=>nav("offerings")}><i className="ti ti-package"/>View All Offerings</button>
         </div>
       </div>
       <img className="img-strip" src={IMAGES.workshopRoom} alt="Just Joy Collective workshop"/>
       <div className="testimonials-bg">
         <div style={{maxWidth:1200,margin:"0 auto"}}>
-          <span className="section-label"><i className="ti ti-quote" aria-hidden="true"/>What Participants Say</span>
+          <span className="section-label"><i className="ti ti-quote"/>What Participants Say</span>
           <h2 className="section-title">Words from past workshops</h2>
           <div className="testimonials-grid">
             {TESTIMONIALS.map((t,i)=><div className="testimonial-card" key={i}><p>{t.quote}</p></div>)}
@@ -537,16 +531,16 @@ function Events({ setPage }) {
 }
 
 function Contact({ setPage }) {
-  const [form,setForm] = useState({name:"",email:"",organisation:"",service:"",message:""});
-  const [submitted,setSubmitted] = useState(false);
-  const [loading,setLoading] = useState(false);
-  const onChange = e => setForm({...form,[e.target.name]:e.target.value});
-  const onSubmit = e => { e.preventDefault(); setLoading(true); setTimeout(()=>{ setLoading(false); setSubmitted(true); },1200); };
+  const [form,setForm]=useState({name:"",email:"",organisation:"",service:"",message:""});
+  const [submitted,setSubmitted]=useState(false);
+  const [loading,setLoading]=useState(false);
+  const onChange=e=>setForm({...form,[e.target.name]:e.target.value});
+  const onSubmit=e=>{ e.preventDefault(); setLoading(true); setTimeout(()=>{ setLoading(false); setSubmitted(true); },1200); };
   return (
     <div className="page">
       <div className="contact-layout">
         <div className="contact-left">
-          <span className="section-label" style={{color:"rgba(255,255,255,.55)"}}><i className="ti ti-mail" aria-hidden="true"/>Get in Touch</span>
+          <span className="section-label" style={{color:"rgba(255,255,255,.55)"}}><i className="ti ti-mail"/>Get in Touch</span>
           <h1>Let's start a <em>conversation</em></h1>
           <p>All of our programs are designed uniquely to achieve your goals. We'd love to hear about your organisation and what you're hoping to create together.</p>
           <div className="contact-detail"><i className="ti ti-mail"/><a href="mailto:justjoycollective@gmail.com">justjoycollective@gmail.com</a></div>
@@ -555,28 +549,24 @@ function Contact({ setPage }) {
         </div>
         <div className="contact-right">
           {submitted ? (
-            <div className="form-success">
-              <i className="ti ti-circle-check"/>
-              <h3>Thank you</h3>
-              <p>Your message has been received. We'll be in touch soon to start the conversation.</p>
-            </div>
+            <div className="form-success"><i className="ti ti-circle-check"/><h3>Thank you</h3><p>Your message has been received. We'll be in touch soon to start the conversation.</p></div>
           ) : (
             <>
               <h2>Send us a message</h2>
               <form onSubmit={onSubmit}>
-                <div className="form-group"><label><i className="ti ti-user" aria-hidden="true"/>Your name *</label><input name="name" type="text" required value={form.name} onChange={onChange} placeholder="Your name"/></div>
-                <div className="form-group"><label><i className="ti ti-mail" aria-hidden="true"/>Email address *</label><input name="email" type="email" required value={form.email} onChange={onChange} placeholder="your@email.com"/></div>
-                <div className="form-group"><label><i className="ti ti-building" aria-hidden="true"/>Organisation</label><input name="organisation" type="text" value={form.organisation} onChange={onChange} placeholder="Your organisation"/></div>
-                <div className="form-group"><label><i className="ti ti-list" aria-hidden="true"/>Area of interest</label>
+                <div className="form-group"><label><i className="ti ti-user"/>Your name *</label><input name="name" type="text" required value={form.name} onChange={onChange} placeholder="Your name"/></div>
+                <div className="form-group"><label><i className="ti ti-mail"/>Email address *</label><input name="email" type="email" required value={form.email} onChange={onChange} placeholder="your@email.com"/></div>
+                <div className="form-group"><label><i className="ti ti-building"/>Organisation</label><input name="organisation" type="text" value={form.organisation} onChange={onChange} placeholder="Your organisation"/></div>
+                <div className="form-group"><label><i className="ti ti-list"/>Area of interest</label>
                   <select name="service" value={form.service} onChange={onChange}>
                     <option value="">Select an offering...</option>
                     {OFFERINGS.map(o=><option key={o.id} value={o.title}>{o.title}</option>)}
                     <option value="General enquiry">General enquiry</option>
                   </select>
                 </div>
-                <div className="form-group"><label><i className="ti ti-message" aria-hidden="true"/>Your message *</label><textarea name="message" required value={form.message} onChange={onChange} placeholder="Tell us about your organisation and what you're hoping to achieve..."/></div>
+                <div className="form-group"><label><i className="ti ti-message"/>Your message *</label><textarea name="message" required value={form.message} onChange={onChange} placeholder="Tell us about your organisation and what you're hoping to achieve..."/></div>
                 <button type="submit" className="btn-primary" style={{width:"100%",justifyContent:"center"}} disabled={loading}>
-                  {loading ? <><i className="ti ti-loader" aria-hidden="true"/>Sending...</> : <><i className="ti ti-send" aria-hidden="true"/>Send Message</>}
+                  {loading?<><i className="ti ti-loader"/>Sending...</>:<><i className="ti ti-send"/>Send Message</>}
                 </button>
               </form>
             </>
@@ -589,19 +579,7 @@ function Contact({ setPage }) {
 }
 
 export default function App() {
-  const [page,setPage] = useState("home");
-  const pages = {
-    home:<Home setPage={setPage}/>,
-    offerings:<Offerings setPage={setPage}/>,
-    about:<About setPage={setPage}/>,
-    events:<Events setPage={setPage}/>,
-    contact:<Contact setPage={setPage}/>,
-  };
-  return (
-    <>
-      <style>{css}</style>
-      <Nav page={page} setPage={setPage}/>
-      {pages[page]}
-    </>
-  );
+  const [page,setPage]=useState("home");
+  const pages={home:<Home setPage={setPage}/>,offerings:<Offerings setPage={setPage}/>,about:<About setPage={setPage}/>,events:<Events setPage={setPage}/>,contact:<Contact setPage={setPage}/>};
+  return (<><style>{css}</style><Nav page={page} setPage={setPage}/>{pages[page]}</>);
 }
