@@ -1,0 +1,84 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: justjoy/public/images
+public_folder: /images
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+
+      - name: "home"
+        label: "Home Page"
+        file: "justjoy/src/content/home.json"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Body Text", name: "heroBody", widget: "text" }
+          - { label: "Hero Quote", name: "heroQuote", widget: "text" }
+          - { label: "Mission Title", name: "missionTitle", widget: "string" }
+          - { label: "Mission Body", name: "missionBody", widget: "text" }
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+
+      - name: "about"
+        label: "About Us Page"
+        file: "justjoy/src/content/about.json"
+        fields:
+          - { label: "Page Intro", name: "intro", widget: "text" }
+          - { label: "Mission Statement", name: "mission", widget: "text" }
+          - label: "Paula"
+            name: "paula"
+            widget: "object"
+            fields:
+              - { label: "Bio Paragraph 1", name: "bio1", widget: "text" }
+              - { label: "Bio Paragraph 2", name: "bio2", widget: "text" }
+              - { label: "Bio Paragraph 3", name: "bio3", widget: "text" }
+          - label: "Jamie"
+            name: "jamie"
+            widget: "object"
+            fields:
+              - { label: "Bio Paragraph 1", name: "bio1", widget: "text" }
+              - { label: "Bio Paragraph 2", name: "bio2", widget: "text" }
+              - { label: "Bio Paragraph 3", name: "bio3", widget: "text" }
+
+      - name: "contact"
+        label: "Contact Page"
+        file: "justjoy/src/content/contact.json"
+        fields:
+          - { label: "Intro Text", name: "intro", widget: "text" }
+          - { label: "Email Address", name: "email", widget: "string" }
+          - { label: "Location Text", name: "location", widget: "string" }
+
+      - name: "events"
+        label: "Events Page"
+        file: "justjoy/src/content/events.json"
+        fields:
+          - { label: "Page Intro", name: "intro", widget: "text" }
+          - { label: "No Events Message", name: "noEventsMessage", widget: "text" }
+          - label: "Upcoming Events"
+            name: "events"
+            widget: "list"
+            fields:
+              - { label: "Event Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Registration Link", name: "link", widget: "string", required: false }
+
+  - name: "offerings"
+    label: "Offerings"
+    folder: "justjoy/src/content/offerings"
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Short Code", name: "short", widget: "string" }
+      - { label: "Description", name: "body", widget: "text" }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
