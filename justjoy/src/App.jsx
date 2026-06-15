@@ -85,8 +85,8 @@ const css = `
   .mission-grid { display:grid; grid-template-columns:1fr 1fr; min-height:520px; }
   .mission-img {
     width:100%; height:100%; display:block; min-height:420px;
-    object-fit:contain;
-    object-position:center center;
+    object-fit:cover;
+    object-position:center 15%;
     background:#EEE0DC;
   }
   .mission-content { padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; background:var(--cream); }
