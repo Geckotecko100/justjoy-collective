@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import homeContent from "./content/home.json";
+import aboutContent from "./content/about.json";
+import contactContent from "./content/contact.json";
+import eventsContent from "./content/events.json";
 
 const IMAGES = {
   heroBackground: "https://static.wixstatic.com/media/d794b0_2e51462a35af448e99718ca7aca0cbcff000.jpg/v1/fill/w_1200,h_800,al_c,q_85,enc_avif,quality_auto/d794b0_2e51462a35af448e99718ca7aca0cbcff000.jpg",
@@ -277,11 +281,8 @@ const OFFERINGS = [
   { id:6, img:"webExp", imgClass:"offering-img", icon:"ti-world", title:"Process Based Web Experiences", short:"PBWE", tags:["Online","Global reach","Multilingual"], body:"Taking our knowledge of process facilitation and applying it to the digital realm, we develop virtual experiences that reach across borders, languages and timezones — enabling organisations to conduct virtual conferences and face-to-face processes in new and engaging ways, with reduced costs and greater participation." },
 ];
 
-const TESTIMONIALS = [
-  { quote:"As I leave this workshop I feel energised because it was such a well facilitated process. I am keen to sharpen the focus of my work. My heart space has been opened." },
-  { quote:"I feel confident, inspired and energized because I can apply all the things I learned from this course into my current and future ministry and really to the whole aspect of my life." },
-  { quote:"I feel informed, equipped and inspired to keep developing my capability in online communication. Moreover, I am energised by the opportunities this platform offers for creating deep, formative, human encounters online." },
-];
+
+
 
 function Nav({ page, setPage }) {
   const [scrolled,setScrolled]=useState(false);
@@ -330,13 +331,14 @@ function Footer({ setPage }) {
 
 function Home({ setPage }) {
   const nav=p=>{ setPage(p); window.scrollTo(0,0); };
+  const { heroTitle, heroBody, heroQuote, missionTitle, missionBody, testimonials } = homeContent;
   return (
     <div className="page">
       <section className="hero">
         <div className="hero-left">
           <p className="hero-eyebrow fade-in"><i className="ti ti-leaf"/>Facilitation & Capacity Development</p>
           <h1 className="hero-title fade-in">Creating a more <em>just</em> and joy‑filled world</h1>
-          <p className="hero-body fade-in">Just Joy Collective works with people in social justice, human rights and mission-based agencies — developing self and social awareness, process design skills, and technology for social change.</p>
+          <p className="hero-body fade-in">{heroBody}</p>
           <div className="hero-actions fade-in">
             <button className="btn-primary" onClick={()=>nav("offerings")}><i className="ti ti-arrow-right"/>Explore Offerings</button>
             <button className="btn-outline" onClick={()=>nav("contact")}><i className="ti ti-message"/>Start a Conversation</button>
@@ -347,7 +349,7 @@ function Home({ setPage }) {
           <div className="hero-overlay"/>
           <div className="hero-quote">
             <span className="hero-quote-mark">"</span>
-            <p>Justice, peace and a joy filled world can be achieved through collaboration rather than competition, dialogue rather than debate.</p>
+            <p>{heroQuote}</p>
             <cite>— Just Joy Collective</cite>
           </div>
         </div>
@@ -357,9 +359,9 @@ function Home({ setPage }) {
         <img className="mission-img" src={IMAGES.workshopGroup} alt="Paula and Jamie — Just Joy Collective"/>
         <div className="mission-content">
           <span className="section-label"><i className="ti ti-heart"/>Our Purpose</span>
-          <h2 className="section-title">Deep conversation is where every engagement begins</h2>
+          <h2 className="section-title">{missionTitle}</h2>
           <div className="divider"/>
-          <p className="section-body">We believe that strategic and sustained partnerships, a systems view and an integrated approach support better cultural shifts. Active participation and application of new learnings to personal and local contexts brings about personal and collective transformation.<br/><br/>Just Joy Collective works with faith-based communities, NGOs and NFPs, and has a personal commitment to supporting organisations working with women, girls and children in situations of marginalisation.</p>
+          <p className="section-body" style={{whiteSpace:"pre-line"}}>{missionBody}</p>
         </div>
       </div>
 
@@ -379,7 +381,7 @@ function Home({ setPage }) {
           <span className="section-label"><i className="ti ti-quote"/>What Participants Say</span>
           <h2 className="section-title">Words from the room</h2>
           <div className="testimonials-grid">
-            {TESTIMONIALS.map((t,i)=><div className="testimonial-card" key={i}><p>{t.quote}</p></div>)}
+            {testimonials.map((t,i)=><div className="testimonial-card" key={i}><p>{t.quote}</p></div>)}
           </div>
         </div>
       </div>
@@ -434,6 +436,7 @@ function Offerings({ setPage }) {
 
 function About({ setPage }) {
   const nav=p=>{ setPage(p); window.scrollTo(0,0); };
+  const { intro, mission, paula, jamie } = aboutContent;
   return (
     <div className="page">
       <div className="about-hero">
@@ -443,16 +446,15 @@ function About({ setPage }) {
           <span className="section-label"><i className="ti ti-users"/>Who We Are</span>
           <h1>The Facilitators</h1>
           <div className="divider"/>
-          <p>Just Joy Collective is built on decades of experience in education, leadership, facilitation and technology — united by a shared belief that a more just and joy-filled world is possible through genuine dialogue and collaboration.</p>
+          <p>{intro}</p>
         </div>
       </div>
 
       <div className="about-mission">
         <h2>Our Way<br/>of Being</h2>
         <div>
-          <p>Our guiding principles of Curiosity, Compassion and Courage underpin the participatory way in which we work and the way we engage others.</p>
-          <p>We believe that justice, peace and a joy-filled world can be achieved through collaboration rather than competition, dialogue rather than debate. Creating and supporting learning communities of practice expands the initial work we offer through our workshops.</p>
-          <p>Just Joy Collective works with faith-based communities, NGOs and NFPs, and has a personal commitment to supporting organisations in developing countries with a focus on women, girls and children in situations of marginalisation.</p>
+          <p>{mission}</p>
+          <p style={{marginTop:"1rem"}}>Just Joy Collective works with faith-based communities, NGOs and NFPs, and has a personal commitment to supporting organisations in developing countries with a focus on women, girls and children in situations of marginalisation.</p>
         </div>
       </div>
 
@@ -462,16 +464,8 @@ function About({ setPage }) {
         <div className="divider"/>
         <div className="team-grid">
           {[
-            { name:"Paula Sgherza", img:IMAGES.paula, role:"Co-founder · Process Facilitator", linkedin:"https://www.linkedin.com/in/paula-sgherza-6750aa3b/", linkedinLabel:"Connect with Paula", paras:[
-              "Paula loves facilitation. It is her joy to be of service to others in this creative and essential work for leaders of today and the future.",
-              "She brings over 30 years' experience as an educator and leader and is highly regarded for her relaxed, contemplative and innovative style.",
-              "Paula is trained in the Art of Hosting, Theory U, Theory of Change, Appreciative Inquiry, Open Space and the Circle Way. She applies a trauma-informed approach to all her work."
-            ]},
-            { name:"Jamie Sgherza", img:IMAGES.jamie, role:"Co-founder · Technology & Facilitation", linkedin:"https://www.linkedin.com/in/jamiesgherza/", linkedinLabel:"Connect with Jamie", paras:[
-              "Jamie loves technology. He brings a wealth of experience from diverse leadership roles across complex education and information technology settings.",
-              "As a skilled leader, educator and facilitator, Jamie creates dynamic environments that encourage personal and professional growth — known for his easy-going, action-oriented style.",
-              "Jamie has trained in Theory U, Theory of Change and project management, and has wide experience assisting organisations with digital transformation."
-            ]},
+            { name:"Paula Sgherza", img:IMAGES.paula, role:"Co-founder · Process Facilitator", linkedin:"https://www.linkedin.com/in/paula-sgherza-6750aa3b/", linkedinLabel:"Connect with Paula", paras:[paula.bio1, paula.bio2, paula.bio3]},
+            { name:"Jamie Sgherza", img:IMAGES.jamie, role:"Co-founder · Technology & Facilitation", linkedin:"https://www.linkedin.com/in/jamiesgherza/", linkedinLabel:"Connect with Jamie", paras:[jamie.bio1, jamie.bio2, jamie.bio3]},
           ].map(m=>(
             <div className="team-card" key={m.name}>
               <div className="team-photo-col">
@@ -499,18 +493,34 @@ function About({ setPage }) {
 
 function Events({ setPage }) {
   const nav=p=>{ setPage(p); window.scrollTo(0,0); };
+  const { intro, noEventsMessage, events } = eventsContent;
   return (
     <div className="page">
       <div className="events-hero">
         <span className="section-label" style={{color:"rgba(255,255,255,.55)"}}><i className="ti ti-calendar"/>Upcoming Events</span>
         <h1>Join Us</h1>
-        <p>Workshops, gatherings and learning opportunities with Just Joy Collective. Register your interest and we'll be in touch when something is scheduled near you.</p>
+        <p>{intro}</p>
       </div>
       <div className="events-empty">
         <i className="ti ti-plant events-empty-icon"/>
-        <h2>No upcoming events scheduled</h2>
-        <p>We're currently planning our next round of workshops and programs. Reach out — we may be able to bring something to your organisation.</p>
-        <div style={{display:"flex",gap:"1rem",justifyContent:"center",flexWrap:"wrap"}}>
+        {events && events.length > 0 ? (
+          <div style={{maxWidth:800,margin:"0 auto",textAlign:"left"}}>
+            {events.map((e,i)=>(
+              <div key={i} style={{background:"#fff",padding:"2rem",marginBottom:"1rem",borderLeft:"3px solid var(--rose)"}}>
+                <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.5rem",marginBottom:".3rem"}}>{e.title}</h3>
+                <p style={{fontSize:".8rem",color:"var(--rose)",marginBottom:".8rem",textTransform:"uppercase",letterSpacing:".1em"}}>{new Date(e.date).toLocaleDateString("en-AU",{weekday:"long",year:"numeric",month:"long",day:"numeric"})} · {e.location}</p>
+                <p style={{color:"var(--mid)",fontSize:".93rem",lineHeight:1.8}}>{e.description}</p>
+                {e.link && <a href={e.link} target="_blank" rel="noreferrer" style={{display:"inline-flex",alignItems:"center",gap:".4rem",marginTop:"1rem",color:"var(--olive)",fontSize:".8rem",textTransform:"uppercase",letterSpacing:".1em",textDecoration:"none",borderBottom:"1px solid var(--fern)"}}>Register →</a>}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            <h2>No upcoming events scheduled</h2>
+            <p>{noEventsMessage}</p>
+          </>
+        )}
+        <div style={{display:"flex",gap:"1rem",justifyContent:"center",flexWrap:"wrap",marginTop:"2rem"}}>
           <button className="btn-primary" onClick={()=>nav("contact")}><i className="ti ti-mail"/>Register Your Interest</button>
           <button className="btn-outline" onClick={()=>nav("offerings")}><i className="ti ti-package"/>View All Offerings</button>
         </div>
@@ -534,6 +544,7 @@ function Contact({ setPage }) {
   const [form,setForm]=useState({name:"",email:"",organisation:"",service:"",message:""});
   const [submitted,setSubmitted]=useState(false);
   const [loading,setLoading]=useState(false);
+  const { intro, email, location } = contactContent;
   const onChange=e=>setForm({...form,[e.target.name]:e.target.value});
   const onSubmit=e=>{ e.preventDefault(); setLoading(true); setTimeout(()=>{ setLoading(false); setSubmitted(true); },1200); };
   return (
@@ -542,10 +553,10 @@ function Contact({ setPage }) {
         <div className="contact-left">
           <span className="section-label" style={{color:"rgba(255,255,255,.55)"}}><i className="ti ti-mail"/>Get in Touch</span>
           <h1>Let's start a <em>conversation</em></h1>
-          <p>All of our programs are designed uniquely to achieve your goals. We'd love to hear about your organisation and what you're hoping to create together.</p>
-          <div className="contact-detail"><i className="ti ti-mail"/><a href="mailto:justjoycollective@gmail.com">justjoycollective@gmail.com</a></div>
+          <p>{intro}</p>
+          <div className="contact-detail"><i className="ti ti-mail"/><a href={`mailto:${email}`}>{email}</a></div>
           <div className="contact-detail"><i className="ti ti-brand-linkedin"/><a href="https://www.linkedin.com/in/just-joy-collective-7132a8237/" target="_blank" rel="noreferrer">Just Joy Collective on LinkedIn</a></div>
-          <div className="contact-detail"><i className="ti ti-map-pin"/><span>Australia — serving organisations worldwide</span></div>
+          <div className="contact-detail"><i className="ti ti-map-pin"/><span>{location}</span></div>
         </div>
         <div className="contact-right">
           {submitted ? (
